@@ -136,7 +136,41 @@ namespace SMTFusionappGrid
         }
         private void gameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            gameTitlePanel.Text = ((ComboBoxItem)gameDropDown.SelectedItem).Content.ToString();
+            string gameTitle = ((ComboBoxItem)gameDropDown.SelectedItem).Content.ToString();
+            gameTitlePanel.Text = gameTitle;
+            if ((bool)colorCheck.IsChecked)
+            {
+                switch (gameTitle)
+                {
+                    case "Persona 3:FES":
+                        midPanel.Background = Brushes.Navy;
+                        break;
+                    case "Persona 4: Golden":
+                        midPanel.Background = Brushes.DarkGoldenrod;
+                        break;
+                    case "Persona 4":
+                        midPanel.Background = Brushes.DarkOliveGreen;
+                        break;
+                    case "Persona 5":
+                        midPanel.Background = Brushes.DarkRed;
+                        break;
+                    case "Persona 5: Royal":
+                        midPanel.Background = Brushes.DarkSalmon;
+                        break;
+                    case "SMT III: Nocturne":
+                        midPanel.Background = Brushes.DarkSeaGreen;
+                        break;
+                    case "SMT IV":
+                        midPanel.Background = Brushes.DarkGreen;
+                        break;
+                    case "SMT V":
+                        midPanel.Background = Brushes.DarkSlateGray;
+                        break;
+                    default:
+                        midPanel.Background = Brushes.Gray;
+                        break;
+                }
+            }
         }
     }
 }

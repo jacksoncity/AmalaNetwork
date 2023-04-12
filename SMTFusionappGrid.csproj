@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="assets\icon.ico" />
     <Resource Include="assets\logo.png" />
   </ItemGroup>

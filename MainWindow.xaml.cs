@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace SMTFusionappGrid
 {
@@ -41,6 +44,17 @@ namespace SMTFusionappGrid
             gameFilter(titles, gameDropDown);
             
 
+        }
+
+        //LOADING THE JSON TO PARSE FOR FUSION CALC
+        public void loadJson()
+        {
+            using (StreamReader r = new StreamReader("data5.js"))
+            {
+                string json = r.ReadToEnd();
+                List<Demon> items = JsonConvert.DeserializeObject<List<Demon>>(json);
+
+            }
         }
 
         //Method to populate a tree with Checkbox items and games dropdown menu
@@ -128,12 +142,12 @@ namespace SMTFusionappGrid
             {
                 checkbox.IsChecked = false;
             }
+
+            
+
         }
 
-        private string getDropDownText()
-        {
-            return gameDropDown.Text;
-        }
+        //GAME DROPDOWN RESPONSE
         private void gameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string gameTitle = ((ComboBoxItem)gameDropDown.SelectedItem).Content.ToString();

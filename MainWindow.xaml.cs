@@ -42,6 +42,9 @@ namespace SMTFusionappGrid
             popFilter(elements, strongTag);
 
             gameFilter(titles, gameDropDown);
+
+            //List<Demon> items = null;
+            //loadJson();
             
 
         }
@@ -55,6 +58,28 @@ namespace SMTFusionappGrid
                 List<Demon> items = JsonConvert.DeserializeObject<List<Demon>>(json);
 
             }
+        }
+
+        public List<string> btnNames()
+        {
+            List<string> btnList = new List<string>
+            {
+                levelSort.Content.ToString(),
+                nameSort.Content.ToString(),
+                raceSort.Content.ToString(),
+                physSort.Content.ToString(),
+                gunSort.Content.ToString(),
+                fireSort.Content.ToString(),
+                iceSort.Content.ToString(),
+                elecSort.Content.ToString(),
+                windSort.Content.ToString(),
+                psychicSort.Content.ToString(),
+                nuclearSort.Content.ToString(),
+                blessSort.Content.ToString(),
+                curseSort.Content.ToString()
+            };
+
+            return btnList;
         }
 
         //Method to populate a tree with Checkbox items and games dropdown menu
@@ -142,8 +167,39 @@ namespace SMTFusionappGrid
             {
                 checkbox.IsChecked = false;
             }
+        }
 
-            
+
+        private void panelBtnSort(object sender, RoutedEventArgs e)
+        {   
+            //get the buttons text content
+            string btnName = (e.Source as Button).Content.ToString();
+            string[] namesRaw = btnNames().ToArray();
+            //check it against all the buttons to see if another critiera is selected (we want to make the text of the
+            // button we press to be "text" + ↑ or ↓
+            for(int i = 0; i < namesRaw.Length; i++)
+            {
+
+                //initially check if its value is default, if so change it
+                if(btnName == namesRaw[i])
+                {
+                    (e.Source as Button).Content = btnName + " ↓";
+                    
+                    //once changed we must now set all other buttons to default (this goes for the rest of the name check if statements
+
+                }
+                //if same name is sorted decending change to accending 
+                if(btnName == btnName + " ↓")
+                {
+                    (e.Source as Button).Content = btnName + " ↑";
+                }
+                //if same name is sorted to accending change to decending 
+                if(btnName == btnName + " ↑")
+                {
+                    (e.Source as Button).Content = btnName + " ↓";
+                }
+            }
+
 
         }
 

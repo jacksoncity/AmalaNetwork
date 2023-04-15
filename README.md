@@ -1,4 +1,4 @@
-# Welcome to the Amala Network
+# Welcome to the Amala Network (WIP)
 
 This software aims to solve an issue that Persona/Shin Megami Tensei fusion calculators online present. 
 

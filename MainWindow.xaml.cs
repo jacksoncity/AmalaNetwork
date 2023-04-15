@@ -35,21 +35,19 @@ namespace SMTFusionappGrid
 
 
             //Populating Filter Tree
-            popFilter(races, raceTag);
-            popFilter(levels, levelTag);
-            popFilter(elements, weakTag);
-            popFilter(elements, nullTag);
-            popFilter(elements, strongTag);
+            PopFilter(races, raceTag);
+            PopFilter(levels, levelTag);
+            PopFilter(elements, weakTag);
+            PopFilter(elements, nullTag);
+            PopFilter(elements, strongTag);
 
-            gameFilter(titles, gameDropDown);
+            GameFilter(titles, gameDropDown);
 
-            //List<Demon> items = null;
-            //loadJson();
 
         }
 
         //LOADING THE JSON TO PARSE FOR FUSION CALC
-        public void loadJson()
+        public void LoadJson()
         {
             using (StreamReader r = new StreamReader("data5.js"))
             {
@@ -59,7 +57,7 @@ namespace SMTFusionappGrid
             }
         }
 
-        public List<string> btnNames()
+        public List<string> BtnNames()
         {
             List<string> btnList = new List<string>
             {
@@ -82,7 +80,7 @@ namespace SMTFusionappGrid
         }
 
         //Method to populate a tree with Checkbox items and games dropdown menu
-        public void popFilter(String[] objArray, TreeViewItem tagName)
+        public void PopFilter(String[] objArray, TreeViewItem tagName)
         {
 
             //rest of content
@@ -98,7 +96,7 @@ namespace SMTFusionappGrid
             }
         }
 
-        public void gameFilter(String[] objArray, ComboBox dropDown)
+        public static void GameFilter(String[] objArray, ComboBox dropDown)
         {
             for (int i = 0; i < objArray.Length; i++)
             {
@@ -113,7 +111,7 @@ namespace SMTFusionappGrid
         //SIDEBAR BUTTON PROPERTIES
 
         // NONE BUTTON EVENT HANDLER
-        private void noneBtnClick(object sender, RoutedEventArgs e)
+        private void NoneBtnClick(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
 
@@ -121,27 +119,27 @@ namespace SMTFusionappGrid
             switch (btn.Name)
             {
                 case "noneBtn":
-                    popClear(raceTag);
-                    popClear(levelTag);
-                    popClear(weakTag);
-                    popClear(nullTag);
-                    popClear(strongTag);
+                    PopClear(raceTag);
+                    PopClear(levelTag);
+                    PopClear(weakTag);
+                    PopClear(nullTag);
+                    PopClear(strongTag);
                     break;
 
                 case "raceBtn":
-                    selectAllBtn(raceTag);
+                    SelectAllBtn(raceTag);
                     break;
                 case "levelBtn":
-                    selectAllBtn(levelTag);
+                    SelectAllBtn(levelTag);
                     break;
                 case "weakBtn":
-                    selectAllBtn(weakTag);
+                    SelectAllBtn(weakTag);
                     break;
                 case "nullBtn":
-                    selectAllBtn(nullTag);
+                    SelectAllBtn(nullTag);
                     break;
                 case "strongBtn":
-                    selectAllBtn(strongTag);
+                    SelectAllBtn(strongTag);
                     break;
 
                 default: 
@@ -152,7 +150,7 @@ namespace SMTFusionappGrid
 
         }
 
-        private void selectAllBtn(TreeViewItem item)
+        private void SelectAllBtn(TreeViewItem item)
         {
             foreach (CheckBox checkbox in item.Items.OfType<CheckBox>())
             {
@@ -160,7 +158,7 @@ namespace SMTFusionappGrid
             }
         }
 
-        private void popClear(TreeViewItem item)
+        private void PopClear(TreeViewItem item)
         {
             foreach(CheckBox checkbox in item.Items.OfType<CheckBox>())
             {
@@ -168,49 +166,50 @@ namespace SMTFusionappGrid
             }
         }
 
-        private void panelBtnSort(object sender, RoutedEventArgs e)
+        private void PanelBtnSort(object sender, RoutedEventArgs e)
         {   
             //get the buttons text content
             string btnName = (e.Source as Button).Content.ToString();
+            string[] defultNames = {"Level", "Name", "Race", "Phys", "Gun", "Fire", "Ice", "Elec", "Wind", "Psychic", "Nuclear", "Bless", "Curse"};
 
             //check it against all the buttons to see if another critiera is selected (we want to make the text of the
             // button we press to be "text" + ↑ or ↓
-            for(int i = 0; i < namesRaw.Length; i++)
+            for(int i = 0; i < defultNames.Length; i++)
             {
 
                 //initially check if its value is default, if so change it
-                if(btnName == namesRaw[i])
+                if(btnName == defultNames[i])
                 {
                     System.Diagnostics.Debug.WriteLine(btnName);
-                    System.Diagnostics.Debug.WriteLine(namesRaw[i]);
-                    (e.Source as Button).Content = btnName + " ↓";
+                    System.Diagnostics.Debug.WriteLine(defultNames[i]);
+                    (e.Source as Button).Content = defultNames[i] + " ↓";
                     
                     //once changed we must now set all other buttons to default (this goes for the rest of the name check if statements
                     
                 }
                 //if same name is sorted decending change to accending 
-                if(btnName == btnName + " ↓")
+                if(btnName == defultNames[i] + " ↓")
                 {
-                    System.Diagnostics.Debug.WriteLine("Middle");
-                    (e.Source as Button).Content = btnName + " ↑";
+                    (e.Source as Button).Content = defultNames[i] + " ↑";
                 }
                 //if same name is sorted to accending change to decending 
-                if(btnName == btnName + " ↑")
+                if(btnName == defultNames[i] + " ↑")
                 {
-                    System.Diagnostics.Debug.WriteLine("bottom");
-                    (e.Source as Button).Content = btnName + " ↓";
+                    (e.Source as Button).Content = defultNames[i] + " ↓";
                 }
             }
-
-
         }
 
         //GAME DROPDOWN RESPONSE
-        private void gameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void GameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string gameTitle = ((ComboBoxItem)gameDropDown.SelectedItem).Content.ToString();
+            string gameTitle = (gameDropDown.SelectedItem as ComboBoxItem).Content.ToString();
             gameTitlePanel.Text = gameTitle;
-            if ((bool)colorCheck.IsChecked)
+            if (!(bool)colorCheck.IsChecked)
+            {
+                midPanel.Background = Brushes.Gray;
+            }
+            else
             {
                 switch (gameTitle)
                 {

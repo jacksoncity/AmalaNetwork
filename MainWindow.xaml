@@ -40,29 +40,29 @@
 
             <!-- ALL/NONE BUTTONS-->
 
-            <Button x:Name="noneBtn" Content="Clear" Click="noneBtnClick" Height="25" Width="100" HorizontalAlignment="Center" Margin="5"/>
+            <Button x:Name="noneBtn" Content="Clear" Click="NoneBtnClick" Height="25" Width="100" HorizontalAlignment="Center" Margin="5"/>
 
 
             <TreeViewItem x:Name="filterLabel" Header="Filter" Focusable="False" Margin="3" IsExpanded="True" Foreground="White">
 
                 <TreeViewItem Header="Race" x:Name="raceTag" Focusable="False"  Margin="3" FontWeight="Bold" Foreground="White">
-                    <Button x:Name="raceBtn" Tag="raceTag" Content="All" Click="noneBtnClick" Width="60" Margin="0,3,0,3"/>
+                    <Button x:Name="raceBtn" Tag="raceTag" Content="All" Click="NoneBtnClick" Width="60" Margin="0,3,0,3"/>
                 </TreeViewItem>
 
                 <TreeViewItem Header="Level" x:Name="levelTag" Focusable="False" Margin="3" FontWeight="Bold" Foreground="White">
-                    <Button x:Name="levelBtn" Tag="level" Content="All" Click="noneBtnClick" Width="60" Margin="0,3,0,3"/>
+                    <Button x:Name="levelBtn" Tag="level" Content="All" Click="NoneBtnClick" Width="60" Margin="0,3,0,3"/>
                 </TreeViewItem>
 
                 <TreeViewItem Header="Weakness" x:Name="weakTag" Focusable="False" Margin="3" FontWeight="Bold" Foreground="White">
-                    <Button x:Name="weakBtn" Tag="weak" Content="All" Click="noneBtnClick" Width="60" Margin="0,3,0,3"/>
+                    <Button x:Name="weakBtn" Tag="weak" Content="All" Click="NoneBtnClick" Width="60" Margin="0,3,0,3"/>
                 </TreeViewItem>
 
                 <TreeViewItem Header="Null" x:Name="nullTag" Focusable="False" Margin="3" FontWeight="Bold" Foreground="White">
-                    <Button x:Name="nullBtn" Tag="null" Content="All" Click="noneBtnClick" Width="60" Margin="0,3,0,3"/>
+                    <Button x:Name="nullBtn" Tag="null" Content="All" Click="NoneBtnClick" Width="60" Margin="0,3,0,3"/>
                 </TreeViewItem>
 
                 <TreeViewItem Header="Strong" x:Name="strongTag" Focusable="False" Margin="3" FontWeight="Bold" Foreground="White">
-                    <Button x:Name="strongBtn" Tag="strong" Content="All" Click="noneBtnClick" Width="60" Margin="0,3,0,3"/>
+                    <Button x:Name="strongBtn" Tag="strong" Content="All" Click="NoneBtnClick" Width="60" Margin="0,3,0,3"/>
                 </TreeViewItem>
 
             </TreeViewItem>
@@ -82,7 +82,7 @@
             </MenuItem>
         </Menu>-->
 
-        <ComboBox Grid.Column="1" x:Name="gameDropDown" Width="200" Height="25" Margin="54,46,0,46" HorizontalAlignment="Left" SelectionChanged="gameDropDown_SelectionChanged" SelectedValuePath="Content" />
+        <ComboBox Grid.Column="1" x:Name="gameDropDown" Width="200" Height="25" Margin="54,46,0,46" HorizontalAlignment="Left" SelectionChanged="GameDropDown_SelectionChanged" SelectedValuePath="Content" />
         <TextBlock FontFamily="pack://application:,,,/Fonts/#Megaten 20XX" FontSize="12" Grid.Column="1" HorizontalAlignment="Left" Margin="72,22,0,0" Text="Select Game:" Height="22" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="1.853,0.44"/>
         <CheckBox x:Name="colorCheck" Foreground="White" Grid.Column="1" Content="Custom Color" HorizontalAlignment="Left" Margin="853,71,0,0" VerticalAlignment="Top"/>
 
@@ -94,10 +94,9 @@
         
         
         <!-- MIDDLE PANEL-->
-        <Grid ShowGridLines="True" Background="Gray" Grid.Column="1" Grid.Row="1" x:Name="midPanel">
+        <Grid ShowGridLines="False" Grid.Column="1" Grid.Row="1" x:Name="midPanel">
             <!-- INNER PANEL GRID SETUP -->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -131,20 +130,20 @@
                Grid.ColumnSpan="14"
                Grid.Row="1"  
                Fill="#333333" />
-            <Button x:Name="levelSort" Foreground="White" Grid.Row="1" Grid.Column="0" Content="Level" BorderBrush="{x:Null}" Background="{x:Null}" Click="panelBtnSort"/>
-            <Button x:Name="nameSort" Foreground="White" Grid.Row="1" Grid.Column="1" Content="Name" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="raceSort" Foreground="White" Grid.Row="1" Grid.Column="2" Content="Race" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
+            <Button x:Name="levelSort" Foreground="White" Grid.Row="1" Grid.Column="0" Content="Level" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="nameSort" Foreground="White" Grid.Row="1" Grid.Column="1" Content="Name" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="raceSort" Foreground="White" Grid.Row="1" Grid.Column="2" Content="Race" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
 
-            <Button x:Name="physSort" Foreground="White" Grid.Row="1" Grid.Column="4" Content="Phys" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="gunSort" Foreground="White" Grid.Row="1" Grid.Column="5" Content="Gun" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="fireSort" Foreground="White" Grid.Row="1" Grid.Column="6" Content="Fire" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="iceSort" Foreground="White" Grid.Row="1" Grid.Column="7" Content="Ice" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="elecSort" Foreground="White" Grid.Row="1" Grid.Column="8" Content="Elec" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="windSort" Foreground="White" Grid.Row="1" Grid.Column="9" Content="Wind" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="psychicSort" Foreground="White" Grid.Row="1" Grid.Column="10" Content="Psychic" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="nuclearSort" Foreground="White" Grid.Row="1" Grid.Column="11" Content="Nuclear" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="blessSort" Foreground="White" Grid.Row="1" Grid.Column="12" Content="Bless" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
-            <Button x:Name="curseSort" Foreground="White" Grid.Row="1" Grid.Column="13" Content="Curse" BorderBrush="{x:Null}" Background="{x:Null}" Click="noneBtnClick"/>
+            <Button x:Name="physSort" Foreground="White" Grid.Row="1" Grid.Column="4" Content="Phys" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="gunSort" Foreground="White" Grid.Row="1" Grid.Column="5" Content="Gun" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="fireSort" Foreground="White" Grid.Row="1" Grid.Column="6" Content="Fire" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="iceSort" Foreground="White" Grid.Row="1" Grid.Column="7" Content="Ice" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="elecSort" Foreground="White" Grid.Row="1" Grid.Column="8" Content="Elec" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="windSort" Foreground="White" Grid.Row="1" Grid.Column="9" Content="Wind" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="psychicSort" Foreground="White" Grid.Row="1" Grid.Column="10" Content="Psychic" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="nuclearSort" Foreground="White" Grid.Row="1" Grid.Column="11" Content="Nuclear" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="blessSort" Foreground="White" Grid.Row="1" Grid.Column="12" Content="Bless" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+            <Button x:Name="curseSort" Foreground="White" Grid.Row="1" Grid.Column="13" Content="Curse" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
         </Grid>
        
 

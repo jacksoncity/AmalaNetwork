@@ -17,6 +17,7 @@ namespace SMTFusionappGrid
         public MainWindow()
         {
             InitializeComponent();
+
             string[] titles = { "Persona 3:FES", "Persona 4", "Persona 4: Golden", "Persona 5", 
                 "Persona 5: Royal", "SMT III: Nocturne", "SMT IV", "SMT V" };
 
@@ -42,14 +43,12 @@ namespace SMTFusionappGrid
             PopFilter(elements, strongTag);
 
             GameFilter(titles, gameDropDown);
-
-
         }
 
         //LOADING THE JSON TO PARSE FOR FUSION CALC
-        public void LoadJson()
+        public void LoadJson(string file)
         {
-            using (StreamReader r = new StreamReader("persona5.json"))
+            using (StreamReader r = new(file))
             {
                 string json = r.ReadToEnd();
                 List<Demon> items = JsonConvert.DeserializeObject<List<Demon>>(json);
@@ -203,45 +202,44 @@ namespace SMTFusionappGrid
         {
             string gameTitle = (gameDropDown.SelectedItem as ComboBoxItem).Content.ToString();
             gameTitlePanel.Text = gameTitle;
-
-
-            //CUSTOM COLOR CHANGING
-            if (!(bool)colorCheck.IsChecked)
-            {
-                midPanel.Background = Brushes.Gray;
-            }
-            else
-            {
                 switch (gameTitle)
                 {
                     case "Persona 3:FES":
+                    LoadJson("p3fes.json");
                         midPanel.Background = Brushes.Navy;
                         break;
                     case "Persona 4: Golden":
+                    LoadJson("p4g.json");
                         midPanel.Background = Brushes.DarkGoldenrod;
                         break;
                     case "Persona 4":
+                    LoadJson("p4.json");
                         midPanel.Background = Brushes.DarkOliveGreen;
                         break;
                     case "Persona 5":
+                    LoadJson("p5.json");
                         midPanel.Background = Brushes.DarkRed;
                         break;
                     case "Persona 5: Royal":
+                    LoadJson("p5r.json");
                         midPanel.Background = Brushes.DarkSalmon;
                         break;
                     case "SMT III: Nocturne":
+                    LoadJson("smt3.json");
                         midPanel.Background = Brushes.DarkSeaGreen;
                         break;
                     case "SMT IV":
+                    LoadJson("smt4.json");
                         midPanel.Background = Brushes.DarkGreen;
                         break;
                     case "SMT V":
+                    LoadJson("smt5.json");
                         midPanel.Background = Brushes.DarkSlateGray;
                         break;
                     default:
+                    LoadJson("def.json");
                         midPanel.Background = Brushes.Gray;
                         break;
-                }
             }
         }
     }

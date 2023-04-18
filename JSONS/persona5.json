@@ -1,0 +1,19 @@
+{
+  "gameTitle": "Persona 5",
+  "personas": [
+    {
+      "arcana": "Chariot",
+      "level": "3",
+      "max": "false",
+      "name": "Agathion",
+      "special": "false"
+    },
+    {
+      "arcana": "",
+      "level": "",
+      "max": "",
+      "name": "",
+      "special":  ""
+    },
+  ]
+}

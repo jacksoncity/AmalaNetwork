@@ -49,11 +49,10 @@ namespace SMTFusionappGrid
         //LOADING THE JSON TO PARSE FOR FUSION CALC
         public void LoadJson()
         {
-            using (StreamReader r = new StreamReader("data5.js"))
+            using (StreamReader r = new StreamReader("persona5.json"))
             {
                 string json = r.ReadToEnd();
                 List<Demon> items = JsonConvert.DeserializeObject<List<Demon>>(json);
-
             }
         }
 
@@ -82,7 +81,6 @@ namespace SMTFusionappGrid
         //Method to populate a tree with Checkbox items and games dropdown menu
         public void PopFilter(String[] objArray, TreeViewItem tagName)
         {
-
             //rest of content
             for (int i = 0; i < objArray.Length; i++)
             {
@@ -115,7 +113,7 @@ namespace SMTFusionappGrid
         {
             Button btn = (Button)sender;
 
-            // Act Accordingly
+            // clear all checks based off 
             switch (btn.Name)
             {
                 case "noneBtn":
@@ -205,6 +203,9 @@ namespace SMTFusionappGrid
         {
             string gameTitle = (gameDropDown.SelectedItem as ComboBoxItem).Content.ToString();
             gameTitlePanel.Text = gameTitle;
+
+
+            //CUSTOM COLOR CHANGING
             if (!(bool)colorCheck.IsChecked)
             {
                 midPanel.Background = Brushes.Gray;

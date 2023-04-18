@@ -28,4 +28,8 @@
     <Resource Include="assets\logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JSONS\" />
+  </ItemGroup>
+
 </Project>

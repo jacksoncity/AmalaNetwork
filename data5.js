@@ -1,4 +1,4 @@
- use// Derived from:
+// Derived from:
 //   https://www.gamefaqs.com/ps4/835628-persona-5/faqs/74769
 //   https://www.gamefaqs.com/ps4/835628-persona-5/faqs/74765
 

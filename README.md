@@ -19,6 +19,6 @@ Games included:
   
   _____________________________________________________________________________
 Features:
-  - Switch between games on the fly through the gmae selector
+  - Switch between games on the fly through the game selector
   - Search for specific Personas/Demons via the search feature or by sorting the Personas/Demons in ascending or descending order for finer tuning
   - Ability to sort by excluding certain critirion like certain demon races/persona arcana, level ranges, weaknesses, strengths, and nulls

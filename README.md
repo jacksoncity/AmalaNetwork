@@ -2,7 +2,7 @@
 
 This software aims to solve an issue that Persona/Shin Megami Tensei fusion calculators online present. 
 
-This issue being that when you emulate these games on a medium or low end computer and have open a fusion calculator from the web browser, it will use a lot of resources and slow down performance. This software aims to fix that by being an all-in-one fusion calculator, covering all sorts of different Persona and Shin Megami Tensei games, all while being lightweight to use as to not bog down the performance of the emulation for a better playing experience.
+This issue being that when you emulate these games on a medium or low end computer and have open a fusion calculator from the web browser, it will use a lot of resources and slow down performance not only in the emulator but also in the web browser, leading to long load times and unpreferable frame rates. This software aims to fix that by being an all-in-one fusion calculator, covering all sorts of different Persona and Shin Megami Tensei games, all while being lightweight to use as to not bog down the performance of the emulation for a better playing experience.
 
 _____________________________________________________________________________
 

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Collections.Generic;
+
 using Newtonsoft.Json;
 
 namespace SMTFusionappGrid
@@ -12,6 +13,8 @@ namespace SMTFusionappGrid
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -43,16 +46,17 @@ namespace SMTFusionappGrid
             PopFilter(elements, strongTag);
 
             GameFilter(titles, gameDropDown);
+
         }
 
         //LOADING THE JSON TO PARSE FOR FUSION CALC
-        public void LoadJson(string file)
+        public List<Game> LoadJson(string gameJson)
         {
-            using (StreamReader r = new(file))
-            {
-                string json = r.ReadToEnd();
-                List<Demon> items = JsonConvert.DeserializeObject<List<Demon>>(json);
-            }
+            using StreamReader reader = new(gameJson);
+            var json = reader.ReadToEnd();
+            List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
+
+            return games;
         }
 
         public List<string> BtnNames()
@@ -200,44 +204,56 @@ namespace SMTFusionappGrid
         //GAME DROPDOWN RESPONSE
         private void GameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
             string gameTitle = (gameDropDown.SelectedItem as ComboBoxItem).Content.ToString();
             gameTitlePanel.Text = gameTitle;
                 switch (gameTitle)
                 {
                     case "Persona 3:FES":
-                    LoadJson("p3fes.json");
+                    LoadJson(@"..\..\..\JSONS\p3fes.json");
+                    
                         midPanel.Background = Brushes.Navy;
                         break;
+
                     case "Persona 4: Golden":
-                    LoadJson("p4g.json");
+                    LoadJson(@"..\..\..\JSONS\p4g.json");
                         midPanel.Background = Brushes.DarkGoldenrod;
                         break;
+
                     case "Persona 4":
-                    LoadJson("p4.json");
+                    List<Game> game = LoadJson(@"..\..\..\JSONS\p4.json");
+
+                    System.Diagnostics.Debug.WriteLine(game[0].Name.ToString());
                         midPanel.Background = Brushes.DarkOliveGreen;
                         break;
+
                     case "Persona 5":
-                    LoadJson("p5.json");
+                    LoadJson(@"..\..\..\JSONS\p5.json");
                         midPanel.Background = Brushes.DarkRed;
                         break;
+
                     case "Persona 5: Royal":
-                    LoadJson("p5r.json");
+                    LoadJson(@"..\..\..\JSONS\p5r.json");
                         midPanel.Background = Brushes.DarkSalmon;
                         break;
+
                     case "SMT III: Nocturne":
-                    LoadJson("smt3.json");
+                    LoadJson(@"..\..\..\JSONS\smt3.json");
                         midPanel.Background = Brushes.DarkSeaGreen;
                         break;
+
                     case "SMT IV":
-                    LoadJson("smt4.json");
+                    LoadJson(@"..\..\..\JSONS\smt4.json");
                         midPanel.Background = Brushes.DarkGreen;
                         break;
+
                     case "SMT V":
-                    LoadJson("smt5.json");
+                    LoadJson(@"..\..\..\JSONS\smt5.json");
                         midPanel.Background = Brushes.DarkSlateGray;
                         break;
+
                     default:
-                    LoadJson("def.json");
+                    LoadJson(@"..\..\..\JSONS\def.json");
                         midPanel.Background = Brushes.Gray;
                         break;
             }

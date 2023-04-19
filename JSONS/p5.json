@@ -1,19 +1,21 @@
-{
-  "gameTitle": "Persona 5",
-  "personas": [
-    {
-      "arcana": "Chariot",
-      "level": "3",
-      "max": "false",
-      "name": "Agathion",
-      "special": "false"
-    },
-    {
-      "arcana": "",
-      "level": "",
-      "max": "",
-      "name": "",
-      "special":  ""
-    }
-  ]
-}
+[
+  {
+    "gameTitle": "Persona 5",
+    "personas": [
+      {
+        "race": "Chariot",
+        "level": 3,
+        "max": false,
+        "name": "Agathion",
+        "special": false
+      },
+      {
+        "race": "Chariot",
+        "level": 10,
+        "max": false,
+        "name": "Slime",
+        "special": false
+      }
+    ]
+  }
+]

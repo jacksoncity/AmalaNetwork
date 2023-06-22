@@ -112,7 +112,7 @@ namespace SMTFusionappGrid
         //SIDEBAR BUTTON PROPERTIES
 
         // NONE BUTTON EVENT HANDLER
-        private void NoneBtnClick(object sender, RoutedEventArgs e)
+        private void FilterHandler(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
 
@@ -126,7 +126,13 @@ namespace SMTFusionappGrid
                     PopClear(nullTag);
                     PopClear(strongTag);
                     break;
-
+                case "checkAllBtn":
+                    SelectAllBtn(raceTag);
+                    SelectAllBtn(levelTag);
+                    SelectAllBtn(weakTag);
+                    SelectAllBtn(nullTag);
+                    SelectAllBtn(strongTag);
+                    break;
                 case "raceBtn":
                     SelectAllBtn(raceTag);
                     break;
@@ -147,9 +153,8 @@ namespace SMTFusionappGrid
                     Console.WriteLine("Error on button press"); 
                     break;
             }
-
-
         }
+
 
         private void SelectAllBtn(TreeViewItem item)
         {
@@ -167,26 +172,46 @@ namespace SMTFusionappGrid
             }
         }
 
+        //brute forced this a bit. theres probably a better way to do it but right now i just need it to work lol
+        private void ButtonDefClear()
+        {
+            string[] defultNames = { "Level", "Name", "Race", "Phys", "Gun", "Fire", "Ice", "Elec", "Wind", "Psychic", "Nuclear", "Bless", "Curse" };
+            levelSort.Content = defultNames[0];
+            nameSort.Content = defultNames[1];
+            raceSort.Content = defultNames[2];
+            physSort.Content = defultNames[3];  
+            gunSort.Content = defultNames[4];
+            fireSort.Content = defultNames[5];
+            iceSort.Content = defultNames[6];   
+            elecSort.Content = defultNames[7];
+            windSort.Content = defultNames[8];
+            psychicSort.Content = defultNames[9];
+            nuclearSort.Content = defultNames[10];
+            blessSort.Content = defultNames[11];
+            curseSort.Content = defultNames[12];
+        }
+
         private void PanelBtnSort(object sender, RoutedEventArgs e)
         {   
             //get the buttons text content
             string btnName = (e.Source as Button).Content.ToString();
             string[] defultNames = {"Level", "Name", "Race", "Phys", "Gun", "Fire", "Ice", "Elec", "Wind", "Psychic", "Nuclear", "Bless", "Curse"};
 
+            ButtonDefClear();
+
             //check it against all the buttons to see if another critiera is selected (we want to make the text of the
             // button we press to be "text" + ↑ or ↓
             for(int i = 0; i < defultNames.Length; i++)
             {
-
                 //initially check if its value is default, if so change it
                 if(btnName == defultNames[i])
                 {
-                    System.Diagnostics.Debug.WriteLine(btnName);
-                    System.Diagnostics.Debug.WriteLine(defultNames[i]);
+/*                    System.Diagnostics.Debug.WriteLine(btnName);
+                    System.Diagnostics.Debug.WriteLine(defultNames[i]);*/
+
                     (e.Source as Button).Content = defultNames[i] + " ↓";
                     
                     //once changed we must now set all other buttons to default (this goes for the rest of the name check if statements
-                    
                 }
                 //if same name is sorted decending change to accending 
                 if(btnName == defultNames[i] + " ↓")
@@ -196,7 +221,7 @@ namespace SMTFusionappGrid
                 //if same name is sorted to accending change to decending 
                 if(btnName == defultNames[i] + " ↑")
                 {
-                    (e.Source as Button).Content = defultNames[i] + " ↓";
+                    (e.Source as Button).Content = defultNames[i];
                 }
             }
         }
@@ -211,50 +236,80 @@ namespace SMTFusionappGrid
                 {
                     case "Persona 3:FES":
                     LoadJson(@"..\..\..\JSONS\p3fes.json");
-                    
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.Navy;
+                    }
                         break;
 
                     case "Persona 4: Golden":
                     LoadJson(@"..\..\..\JSONS\p4g.json");
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkGoldenrod;
+                    }
                         break;
 
                     case "Persona 4":
-                    List<Game> game = LoadJson(@"..\..\..\JSONS\p4.json");
+                    LoadJson(@"..\..\..\JSONS\p4.json");
 
-                    System.Diagnostics.Debug.WriteLine(game[0].Name.ToString());
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkOliveGreen;
+                    }
                         break;
 
                     case "Persona 5":
                     LoadJson(@"..\..\..\JSONS\p5.json");
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkRed;
+                    }
                         break;
 
                     case "Persona 5: Royal":
                     LoadJson(@"..\..\..\JSONS\p5r.json");
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkSalmon;
+                    }
                         break;
 
                     case "SMT III: Nocturne":
                     LoadJson(@"..\..\..\JSONS\smt3.json");
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkSeaGreen;
+                    }
                         break;
 
                     case "SMT IV":
                     LoadJson(@"..\..\..\JSONS\smt4.json");
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkGreen;
+                    }
                         break;
 
                     case "SMT V":
                     LoadJson(@"..\..\..\JSONS\smt5.json");
+
+                    if (colorCheck.IsChecked == true)
+                    {
                         midPanel.Background = Brushes.DarkSlateGray;
+                    }
                         break;
 
                     default:
                     LoadJson(@"..\..\..\JSONS\def.json");
                         midPanel.Background = Brushes.Gray;
+
                         break;
             }
         }

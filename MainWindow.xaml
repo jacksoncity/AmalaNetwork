@@ -85,6 +85,8 @@
         
         <!-- MIDDLE PANEL-->
         <Grid ShowGridLines="true" Grid.Column="1" Grid.Row="1" x:Name="midPanel">
+ 
+            
             <!-- INNER PANEL GRID SETUP -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -102,6 +104,7 @@
                 <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
+
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -110,11 +113,8 @@
             </Grid.RowDefinitions>
             
             <!-- LABEL TOP SECTION -->
-            <Rectangle 
-               Grid.Column="0"
-               Grid.Row="0"  
-               Grid.ColumnSpan="14"
-               Fill="#FF171717" />
+
+            
             <TextBlock x:Name="gameTitlePanel" Foreground="White" FontSize="20" FontFamily="pack://application:,,,/Fonts/#Megaten 20XX" Grid.ColumnSpan="14" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             
             <Rectangle 
@@ -135,6 +135,17 @@
             <Button x:Name="nuclearSort" Foreground="White" Grid.Row="1" Grid.Column="11" Content="Nuclear" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
             <Button x:Name="blessSort" Foreground="White" Grid.Row="1" Grid.Column="12" Content="Bless" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
             <Button x:Name="curseSort" Foreground="White" Grid.Row="1" Grid.Column="13" Content="Curse" BorderBrush="{x:Null}" Background="{x:Null}" Click="PanelBtnSort"/>
+
+            <Rectangle 
+               Grid.Column="0"
+               Grid.Row="0"  
+               Grid.ColumnSpan="14"
+               Fill="#FF171717" />
+
+            <ItemsControl Grid.Row="2" Grid.Column="1">
+                <TextBlock Text="here" Margin="5" FontSize="20" Foreground="#FF0FB120" HorizontalAlignment="Center"/>
+            </ItemsControl>
+            
         </Grid>
        
 

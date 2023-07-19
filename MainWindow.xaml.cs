@@ -192,38 +192,76 @@ namespace SMTFusionappGrid
         }
 
         private void PanelBtnSort(object sender, RoutedEventArgs e)
-        {   
+        {
             //get the buttons text content
             string btnName = (e.Source as Button).Content.ToString();
-            string[] defultNames = {"Level", "Name", "Race", "Phys", "Gun", "Fire", "Ice", "Elec", "Wind", "Psychic", "Nuclear", "Bless", "Curse"};
+            string[] defultNames = { "Level", "Name", "Race", "Phys", "Gun", "Fire", "Ice", "Elec", "Wind", "Psychic", "Nuclear", "Bless", "Curse" };
 
             ButtonDefClear();
 
             //check it against all the buttons to see if another critiera is selected (we want to make the text of the
             // button we press to be "text" + ↑ or ↓
-            for(int i = 0; i < defultNames.Length; i++)
+            for (int i = 0; i < defultNames.Length; i++)
             {
                 //initially check if its value is default, if so change it
-                if(btnName == defultNames[i])
+                if (btnName == defultNames[i])
                 {
-/*                    System.Diagnostics.Debug.WriteLine(btnName);
-                    System.Diagnostics.Debug.WriteLine(defultNames[i]);*/
+                    /*                    System.Diagnostics.Debug.WriteLine(btnName);
+                                        System.Diagnostics.Debug.WriteLine(defultNames[i]);*/
 
                     (e.Source as Button).Content = defultNames[i] + " ↓";
-                    
+
                     //once changed we must now set all other buttons to default (this goes for the rest of the name check if statements
                 }
                 //if same name is sorted decending change to accending 
-                if(btnName == defultNames[i] + " ↓")
+                if (btnName == defultNames[i] + " ↓")
                 {
                     (e.Source as Button).Content = defultNames[i] + " ↑";
                 }
                 //if same name is sorted to accending change to decending 
-                if(btnName == defultNames[i] + " ↑")
+                if (btnName == defultNames[i] + " ↑")
                 {
                     (e.Source as Button).Content = defultNames[i];
                 }
             }
+        }
+
+        //MIDDLE PANEL DEMON SELECTOR
+        public static string popMiddle()
+        {
+            string filePath = "C:\\Users\\Jackson\\Documents\\DESKTOP\\PERSONAL_PROGRAMMING\\AmalaNetwork\\JSONS\\p3fes.json";
+            //path to json (find way to get json dynamically on game switch)
+            string jsonString = File.ReadAllText(filePath);
+
+            //Deserialize JSON
+            var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonString);
+
+            foreach(var entry in json)
+            {
+                //get name and values
+                string name = entry.Key;
+                string attributes = entry.Value;
+
+                //access each attribute 
+                int cardlvl = entry.Value.cardlvl;
+                string heart = entry.Value.heart;
+                string inherits = entry.Value.inherits;
+                int lvl = entry.Value.lvl;
+                string race = entry.Value.race;
+                string resists = entry.Value.resists;
+                foreach(var skill in entry.Value.skill)
+                {
+                    string skillName = skill.Name;
+                    int skillLvl = skill.Value;
+                }
+                foreach(var stats in entry.Value.stats)
+                {
+                    int stat = stats;
+                }
+                return name;
+            }
+
+            return "if here, error";
         }
 
         //GAME DROPDOWN RESPONSE

@@ -5,8 +5,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Collections.Generic;
-
 using Newtonsoft.Json;
+using System.Net;
+using Newtonsoft.Json.Linq;
+using System.Xml;
 
 namespace SMTFusionappGrid
 {
@@ -47,17 +49,7 @@ namespace SMTFusionappGrid
 
             GameFilter(titles, gameDropDown);
 
-        }
-
-        //LOADING THE JSON TO PARSE FOR FUSION CALC
-        public List<Game> LoadJson(string gameJson)
-        {
-            using StreamReader reader = new(gameJson);
-            var json = reader.ReadToEnd();
-            List<Game> games = JsonConvert.DeserializeObject<List<Game>>(json);
-
-            return games;
-        }
+    }
 
         public List<string> BtnNames()
         {
@@ -227,43 +219,89 @@ namespace SMTFusionappGrid
         }
 
         //MIDDLE PANEL DEMON SELECTOR
-        public static string popMiddle()
+        //public static string popMiddle()
+        //{
+        //    string filePath = @"..\..\..\JSONS\p3fes.json";
+        //    //path to json (find way to get json dynamically on game switch)
+        //    string jsonString = File.ReadAllText(filePath);
+
+        //    //Deserialize JSON
+        //    var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonString);
+
+        //    foreach(var entry in json)
+        //    {
+        //        //get name and values
+        //        string name = entry.Key;
+        //        string attributes = entry.Value;
+
+        //        //access each attribute 
+        //        int cardlvl = entry.Value.cardlvl;
+        //        string heart = entry.Value.heart;
+        //        string inherits = entry.Value.inherits;
+        //        int lvl = entry.Value.lvl;
+        //        string race = entry.Value.race;
+        //        string resists = entry.Value.resists;
+        //        foreach(var skill in entry.Value.skill)
+        //        {
+        //            string skillName = skill.Name;
+        //            int skillLvl = skill.Value;
+        //        }
+        //        foreach(var stats in entry.Value.stats)
+        //        {
+        //            int stat = stats;
+        //        }
+        //        return name;
+        //    }
+
+        //    return "if here, error";
+        //}
+
+        private void LoadJsonData(string name)
         {
-            string filePath = "C:\\Users\\Jackson\\Documents\\DESKTOP\\PERSONAL_PROGRAMMING\\AmalaNetwork\\JSONS\\p3fes.json";
-            //path to json (find way to get json dynamically on game switch)
-            string jsonString = File.ReadAllText(filePath);
-
-            //Deserialize JSON
-            var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonString);
-
-            foreach(var entry in json)
+            string jsonData = File.ReadAllText("C:\\Users\\Jackson\\Documents\\DESKTOP\\PERSONAL_PROGRAMMING\\AmalaNetwork\\JSONS\\p3fes.json");
+            var data = (JObject)JsonConvert.DeserializeObject(jsonData);
+            var demons = data["dList"].Children();
+            foreach ( var demon in demons )
             {
-                //get name and values
-                string name = entry.Key;
-                string attributes = entry.Value;
+                //DEMON NAME
+                var dName = demon["dName"].Value<string>();
 
-                //access each attribute 
-                int cardlvl = entry.Value.cardlvl;
-                string heart = entry.Value.heart;
-                string inherits = entry.Value.inherits;
-                int lvl = entry.Value.lvl;
-                string race = entry.Value.race;
-                string resists = entry.Value.resists;
-                foreach(var skill in entry.Value.skill)
-                {
-                    string skillName = skill.Name;
-                    int skillLvl = skill.Value;
-                }
-                foreach(var stats in entry.Value.stats)
-                {
-                    int stat = stats;
-                }
-                return name;
+                TextBlock toAddName = new TextBlock();
+                toAddName.Text = dName;
+                toAddName.TextAlignment = TextAlignment.Center;
+                toAddName.FontSize = 18;
+                toAddName.Foreground = new SolidColorBrush(Colors.White);
+                toAddName.Padding = new Thickness(7);
+                nameColPop.Items.Add(toAddName);
+
+                //DEMON LEVEL
+                var dLvl = demon["lvl"].Value<string>();
+
+                TextBlock toAddLvl = new TextBlock();
+                toAddLvl.Text = dLvl;
+                toAddName.TextAlignment = TextAlignment.Center;
+                toAddLvl.FontSize = 18;
+                toAddLvl.Foreground = new SolidColorBrush(Colors.White);
+                toAddLvl.Padding = new Thickness(7);
+                lvlColPop.Items.Add(toAddLvl);
+
+                //DEMON RACE
+                var dRace = demon["race"].Value<string>();
+
+                TextBlock toAddRace = new TextBlock();
+                toAddRace.Text = dRace;
+                toAddName.TextAlignment = TextAlignment.Center;
+                toAddRace.FontSize = 18;
+                toAddRace.Foreground = new SolidColorBrush(Colors.White);
+                toAddRace.Padding = new Thickness(7);
+                raceColPop.Items.Add(toAddRace);
+
+                //DEMON AFFINITIES
+
+
             }
-
-            return "if here, error";
         }
-
+ 
         //GAME DROPDOWN RESPONSE
         private void GameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -273,7 +311,9 @@ namespace SMTFusionappGrid
                 switch (gameTitle)
                 {
                     case "Persona 3:FES":
-                    LoadJson(@"..\..\..\JSONS\p3fes.json");
+                    //LoadJson(@"..\..\..\JSONS\p3fes.json");
+                    //LoadJsonData("p3fes.json");
+                    LoadJsonData("test.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -282,7 +322,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "Persona 4: Golden":
-                    LoadJson(@"..\..\..\JSONS\p4g.json");
+                   // LoadJson(@"..\..\..\JSONS\p4g.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -291,7 +331,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "Persona 4":
-                    LoadJson(@"..\..\..\JSONS\p4.json");
+                    //LoadJson(@"..\..\..\JSONS\p4.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -300,7 +340,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "Persona 5":
-                    LoadJson(@"..\..\..\JSONS\p5.json");
+                    //LoadJson(@"..\..\..\JSONS\p5.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -309,7 +349,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "Persona 5: Royal":
-                    LoadJson(@"..\..\..\JSONS\p5r.json");
+                    //LoadJson(@"..\..\..\JSONS\p5r.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -318,7 +358,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "SMT III: Nocturne":
-                    LoadJson(@"..\..\..\JSONS\smt3.json");
+                    //LoadJson(@"..\..\..\JSONS\smt3.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -327,7 +367,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "SMT IV":
-                    LoadJson(@"..\..\..\JSONS\smt4.json");
+                    //LoadJson(@"..\..\..\JSONS\smt4.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -336,7 +376,7 @@ namespace SMTFusionappGrid
                         break;
 
                     case "SMT V":
-                    LoadJson(@"..\..\..\JSONS\smt5.json");
+                   // LoadJson(@"..\..\..\JSONS\smt5.json");
 
                     if (colorCheck.IsChecked == true)
                     {
@@ -345,7 +385,7 @@ namespace SMTFusionappGrid
                         break;
 
                     default:
-                    LoadJson(@"..\..\..\JSONS\def.json");
+                    //LoadJson(@"..\..\..\JSONS\def.json");
                         midPanel.Background = Brushes.Gray;
 
                         break;

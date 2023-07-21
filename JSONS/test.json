@@ -1,0 +1,58 @@
+{
+  "dList": [
+    {
+      "dName" :  "Abaddon",
+      "cardlvl": 75,
+      "heart": "Tome of the Void",
+      "inherits": "ailment",
+      "lvl": 68,
+      "race": "Devil",
+      "resists": "---nw--wn",
+      "skills": {
+        "Absorb Strike": 74,
+        "Evil Smile": 0,
+        "High Counter": 0,
+        "Null Pierce": 73,
+        "Null Slash": 72,
+        "Null Strike": 71,
+        "Weary Thrust": 0
+      },
+      "stats": [ 46, 52, 49, 33, 44 ]
+    },
+    {
+      "dName": "Alilat",
+      "cardlvl": 91,
+      "heart": "Divine Pillar",
+      "inherits": "recovery",
+      "lvl": 84,
+      "race": "Empress",
+      "resists": "sss-----w",
+      "skills": {
+        "Mabufudyne": 0,
+        "Makarakarn": 0,
+        "Regenerate 3": 0,
+        "Repel Pierce": 90,
+        "Repel Slash": 88,
+        "Repel Strike": 89
+      },
+      "stats": [ 53, 64, 61, 52, 60 ]
+    },
+    {
+      "dName": "Alp",
+      "cardlvl": 9,
+      "inherits": "recovery",
+      "lvl": 6,
+      "race": "Lovers",
+      "resists": "----w-s--",
+      "skills": {
+        "Charmdi": 8,
+        "Dia": 0,
+        "Garu": 0,
+        "Marin Karin": 7,
+        "Mudo": 11,
+        "Sukunda": 0
+      },
+      "stats": [ 3, 7, 5, 5, 5 ]
+    }
+  ]
+}

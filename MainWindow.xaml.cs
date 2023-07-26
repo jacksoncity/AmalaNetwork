@@ -9,6 +9,10 @@ using Newtonsoft.Json;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Xml;
+using System.Data;
+using System.Windows.Documents;
+using System.Windows.Navigation;
+using System.Diagnostics;
 
 namespace SMTFusionappGrid
 {
@@ -218,43 +222,6 @@ namespace SMTFusionappGrid
             }
         }
 
-        //MIDDLE PANEL DEMON SELECTOR
-        //public static string popMiddle()
-        //{
-        //    string filePath = @"..\..\..\JSONS\p3fes.json";
-        //    //path to json (find way to get json dynamically on game switch)
-        //    string jsonString = File.ReadAllText(filePath);
-
-        //    //Deserialize JSON
-        //    var json = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jsonString);
-
-        //    foreach(var entry in json)
-        //    {
-        //        //get name and values
-        //        string name = entry.Key;
-        //        string attributes = entry.Value;
-
-        //        //access each attribute 
-        //        int cardlvl = entry.Value.cardlvl;
-        //        string heart = entry.Value.heart;
-        //        string inherits = entry.Value.inherits;
-        //        int lvl = entry.Value.lvl;
-        //        string race = entry.Value.race;
-        //        string resists = entry.Value.resists;
-        //        foreach(var skill in entry.Value.skill)
-        //        {
-        //            string skillName = skill.Name;
-        //            int skillLvl = skill.Value;
-        //        }
-        //        foreach(var stats in entry.Value.stats)
-        //        {
-        //            int stat = stats;
-        //        }
-        //        return name;
-        //    }
-
-        //    return "if here, error";
-        //}
 
         private void LoadJsonData(string name)
         {
@@ -263,15 +230,26 @@ namespace SMTFusionappGrid
             var demons = data["dList"].Children();
             foreach ( var demon in demons )
             {
+
                 //DEMON NAME
                 var dName = demon["dName"].Value<string>();
-
-                TextBlock toAddName = new TextBlock();
+                TextBlock toAddName = new TextBlock();               
                 toAddName.Text = dName;
                 toAddName.TextAlignment = TextAlignment.Center;
                 toAddName.FontSize = 18;
                 toAddName.Foreground = new SolidColorBrush(Colors.White);
                 toAddName.Padding = new Thickness(7);
+                //HYPERLINK ACTIVITY
+                Run run1 = new Run(dName);
+                Hyperlink hyperlink = new Hyperlink(run1)
+                {
+                    NavigateUri = new Uri("https://www.youtube.com/")
+                };
+                hyperlink.RequestNavigate += new System.Windows.Navigation.RequestNavigateEventHandler(hyperlink_RequestNavigate);
+                hyperlink.Foreground = new SolidColorBrush(Colors.White);
+                toAddName.Inlines.Clear();
+                toAddName.Inlines.Add(hyperlink);
+                //add name
                 nameColPop.Items.Add(toAddName);
 
                 //DEMON LEVEL
@@ -279,7 +257,9 @@ namespace SMTFusionappGrid
 
                 TextBlock toAddLvl = new TextBlock();
                 toAddLvl.Text = dLvl;
-                toAddName.TextAlignment = TextAlignment.Center;
+                //toAddName.TextAlignment = TextAlignment.Center;
+                toAddLvl.HorizontalAlignment = HorizontalAlignment.Center;
+                
                 toAddLvl.FontSize = 18;
                 toAddLvl.Foreground = new SolidColorBrush(Colors.White);
                 toAddLvl.Padding = new Thickness(7);
@@ -290,7 +270,8 @@ namespace SMTFusionappGrid
 
                 TextBlock toAddRace = new TextBlock();
                 toAddRace.Text = dRace;
-                toAddName.TextAlignment = TextAlignment.Center;
+                //toAddName.TextAlignment = TextAlignment.Center;
+                toAddLvl.HorizontalAlignment = HorizontalAlignment.Center;
                 toAddRace.FontSize = 18;
                 toAddRace.Foreground = new SolidColorBrush(Colors.White);
                 toAddRace.Padding = new Thickness(7);
@@ -301,7 +282,13 @@ namespace SMTFusionappGrid
 
             }
         }
- 
+        //HELPS EXECUTE THE HYPERLINK OF THE DEMONS NAME
+        private void hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri){ UseShellExecute = true});
+            e.Handled = true;
+        }
+
         //GAME DROPDOWN RESPONSE
         private void GameDropDown_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

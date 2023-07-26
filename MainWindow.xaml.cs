@@ -13,6 +13,8 @@ using System.Data;
 using System.Windows.Documents;
 using System.Windows.Navigation;
 using System.Diagnostics;
+using System.CodeDom;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SMTFusionappGrid
 {
@@ -233,12 +235,8 @@ namespace SMTFusionappGrid
 
                 //DEMON NAME
                 var dName = demon["dName"].Value<string>();
-                TextBlock toAddName = new TextBlock();               
-                toAddName.Text = dName;
-                toAddName.TextAlignment = TextAlignment.Center;
-                toAddName.FontSize = 18;
-                toAddName.Foreground = new SolidColorBrush(Colors.White);
-                toAddName.Padding = new Thickness(7);
+                TextBlock toAddName = columnPopString(dName);               
+
                 //HYPERLINK ACTIVITY
                 Run run1 = new Run(dName);
                 Hyperlink hyperlink = new Hyperlink(run1)
@@ -255,38 +253,143 @@ namespace SMTFusionappGrid
                 //DEMON LEVEL
                 var dLvl = demon["lvl"].Value<string>();
 
-                TextBlock toAddLvl = new TextBlock();
-                toAddLvl.Text = dLvl;
-                //toAddName.TextAlignment = TextAlignment.Center;
-                toAddLvl.HorizontalAlignment = HorizontalAlignment.Center;
-                
-                toAddLvl.FontSize = 18;
-                toAddLvl.Foreground = new SolidColorBrush(Colors.White);
-                toAddLvl.Padding = new Thickness(7);
-                lvlColPop.Items.Add(toAddLvl);
+                lvlColPop.Items.Add(columnPopString(dLvl));
 
                 //DEMON RACE
                 var dRace = demon["race"].Value<string>();
 
-                TextBlock toAddRace = new TextBlock();
-                toAddRace.Text = dRace;
-                //toAddName.TextAlignment = TextAlignment.Center;
-                toAddLvl.HorizontalAlignment = HorizontalAlignment.Center;
-                toAddRace.FontSize = 18;
-                toAddRace.Foreground = new SolidColorBrush(Colors.White);
-                toAddRace.Padding = new Thickness(7);
-                raceColPop.Items.Add(toAddRace);
+                raceColPop.Items.Add(columnPopString(dRace));
 
                 //DEMON AFFINITIES
+                var dAff = demon["resists"];
 
+                string str = (string)dAff;
+                //ARRAY OF OUR AFFINITIES
+                char[] ch = new char[str.Length];
 
+                for(int i = 0; i < str.Length; i++)
+                {
+                    ch[i] = str[i];
+                }
+
+                //PHYS
+                PhysColPop.Items.Add(columnPopChar(ch[1]));
+
+                //GUN
+                gunColPop.Items.Add(columnPopChar(ch[2]));
+
+                //FIRE
+                fireColPop.Items.Add(columnPopChar(ch[3]));
+
+                //ICE
+                iceColPop.Items.Add(columnPopChar(ch[4]));
+
+                //ELEC
+                elecColPop.Items.Add(columnPopChar(ch[5]));
+
+                //WIND
+                windColPop.Items.Add(columnPopChar(ch[6]));
+
+                //BLESS
+                blessColPop.Items.Add(columnPopChar(ch[7]));
+
+                //CURSE
+                curseColPop.Items.Add(columnPopChar(ch[8]));
             }
         }
+
+        private TextBlock columnPopString(string txt)
+        {
+            TextBlock toAdd = new TextBlock();
+            toAdd.Text = txt;
+            toAdd.HorizontalAlignment = HorizontalAlignment.Center;
+            toAdd.FontSize = 18;
+            toAdd.Foreground = new SolidColorBrush(Colors.White);
+            toAdd.Padding = new Thickness(7);
+
+            return toAdd;
+        }
+
+        private TextBlock columnPopChar(char c)
+        {
+            TextBlock toAdd = new TextBlock();
+            string toText = AffinityCheck(c);
+            toAdd.HorizontalAlignment = HorizontalAlignment.Center;
+            toAdd.FontSize = 18;
+
+            switch (toText)
+            {
+                case "-":
+                    toAdd.Foreground = new SolidColorBrush(Colors.White);
+                    break;
+                case "Str":
+                    toAdd.Foreground = new SolidColorBrush(Colors.Green);
+                    break;
+                case "Nu":
+                    toAdd.Foreground = new SolidColorBrush(Colors.Fuchsia);
+                    break;
+                case "Wk":
+                    toAdd.Foreground = new SolidColorBrush(Colors.Red);
+                    break;
+                case "Rp":
+                    toAdd.Foreground = new SolidColorBrush(Colors.Yellow);
+                    break;
+                case "Dr":
+                    toAdd.Foreground = new SolidColorBrush(Colors.Cyan);
+                    break;
+                default:
+                    toAdd.Foreground = new SolidColorBrush(Colors.Lime);
+                    break;
+            }
+            toAdd.Text = toText;
+            toAdd.Padding = new Thickness(7);
+
+            return toAdd;
+        }
+
         //HELPS EXECUTE THE HYPERLINK OF THE DEMONS NAME
         private void hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri){ UseShellExecute = true});
             e.Handled = true;
+        }
+
+        private string AffinityCheck(char affinity)
+        {
+            string toRet;
+            
+            switch (affinity)
+            {
+                case '-':
+                    toRet = "-";
+                    break;
+
+                case 's':
+                    toRet = "Str";
+                    break;
+
+                case 'n':
+                    toRet = "Nu";
+                    break;
+
+                case 'w':
+                    toRet = "Wk";
+                    break;
+
+                case 'r':
+                    toRet = "Rp";
+                    break;
+
+                case 'd':
+                    toRet = "Dr";
+                    break;
+
+                default:
+                    toRet = "Err";
+                    break;
+            }
+            
+            return toRet;
         }
 
         //GAME DROPDOWN RESPONSE
